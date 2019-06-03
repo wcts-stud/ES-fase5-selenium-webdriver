@@ -2,13 +2,18 @@
 package br.org.catolicasc.selenium.webdriver;
 
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import junit.framework.TestCase;
 
@@ -31,6 +36,8 @@ public class ExemploTest extends TestCase {
 	@Test
 	public void testeGmail() throws Exception {
 		driver.get("http://www.gmail.com.br/");
+
+		WebDriverWait wait = new WebDriverWait(driver, 15);
 		
 		/*
 		 * insere e-mail para login
@@ -51,6 +58,7 @@ public class ExemploTest extends TestCase {
 
 		// aguarda 1s para @GET pagina insercao senha
 		Thread.sleep(1000);
+		
 		
 		// insere a senha e próxima página
 		WebElement campoDeSenha = driver.findElement(By.xpath("//input[@class='whsOnd zHQkBf']"));
@@ -116,6 +124,7 @@ public class ExemploTest extends TestCase {
 	
 		// clica para enviar o e-mail
 		driver.findElement(By.xpath("//div[text()='Send']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Message sent')]")));
 
 		System.out.println("3. Novo e-mail enviado");
 		
@@ -147,6 +156,56 @@ public class ExemploTest extends TestCase {
 		
 		
 		
+		// Lendo e-mail enviado a mim mesmo		
+
+		// now talking un-read email form inbox into a list
+		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zF']"));
+		
+		/*
+		// real logic starts here
+		for(int i=0; i < unreadmail.size(); i++){
+					
+		    if( unreadmail.get(i).isDisplayed() == true ){		    	
+		        // now verify if you have got mail form a specific mailer (Note Un-read mails)
+		        // for read mails xpath loactor will change but logic will remain same
+		        if( unreadmail.get(i).getText().equals("me") ){
+		            System.out.println("Yes we have got mail form " + "me");
+		            // also you can perform more actions here 
+		            // like if you want to open email form the mailer
+		            
+		            break;
+		        } else {
+		            System.out.println("No mail form " + "me");
+		        }
+		    }
+		}
+		*/
+		
+		for(WebElement mail : unreadmail) {
+			if( mail.isDisplayed() == true ){
+				mail.click();
+			}
+		}
+
+		System.out.println("5. E-mail recebido foi aberto");
+		
+		
+		
+		
+		// responde e-mail enviado;
+		driver.findElement(By.xpath("//div[@data-tooltip='Reply']")).click();
+
+		// preenche o corpo da mensagem;
+		driver.findElement(By.xpath("//div[@aria-label=\"Message Body\"]")).sendKeys("Ok, email lido. Obrigado.");		
+		
+		// clica para enviar o e-mail
+		driver.findElement(By.xpath("//div[text()='Send']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Message sent.')]")));
+		Thread.sleep(2000);
+		
+		System.out.println("6. E-mail recebido foi respondido");
+
+		
 		/*
 		 * 
 		 *  5. Abrir o e-mail que voce enviou para você mesmo;
@@ -158,8 +217,38 @@ public class ExemploTest extends TestCase {
 		 *  8. Validar o e-mail na Caixa de itens excluídos;
 		 */
 		
-				
 		
+	
+		// acessa lixeira
+		driver.get("https://mail.google.com/mail/#trash/");
+
+		
+
+		Thread.sleep(4000);	
+		
+		
+		
+		// TODO: deletando e-mail - FALHANDO 
+		
+		List<WebElement> deleted = driver.findElements(By.xpath("//*[@class='zA zE']"));
+		
+		for(WebElement mail : deleted) {
+			if(mail.isDisplayed()) {
+				mail.click();
+			}
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nH if']")));
+		
+		// clica no botão "delete forever"		driver.findElement(By.xpath("/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[1]/div[3]/div[1]/div/div[2]/div")).click();
+
+		System.out.println("7. E-mail respondido deletado");
+		
+
+
+		
+		
+
+
 		
 		
 		
@@ -188,6 +277,6 @@ public class ExemploTest extends TestCase {
 
 		Thread.sleep(3000);
 		
-	}
-
+	}	
+	
 }
