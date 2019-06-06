@@ -55,31 +55,27 @@ public class ExemploTest extends TestCase {
 		 * 
 		 */
 
+		
+		
+		
 		// aguarda 1s para @GET pagina insercao senha
-		//Thread.sleep(1000);
-		
-		
+		Thread.sleep(1000);		
 		
 		// wait field password
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//input")));
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//input")));
 
 		
-		// insere a senha e próxima página
+		// insere a senha e "next"
 		WebElement campoDeSenha = driver.findElement(By.xpath("//input[@class='whsOnd zHQkBf']"));
 		campoDeSenha.sendKeys("Teste12345");
 		driver.findElement(By.id("passwordNext")).click();
-		//campoDeSenha.submit();
 		
 		System.out.println("1. Login realizado com sucesso");
-		
-		/*
-		//boolean caixaEntrada = driver.getPageSource().contains("Inbox");  // 
-		boolean caixaEntrada = driver.findElement(By.xpath("//a[@href='https://mail.google.com/mail/#inbox']"));
-		assertTrue(caixaEntrada);
-		*/
 
-		Thread.sleep(7000);
 		
+		
+		Thread.sleep(4000);
+
 		
 		/*
 		 * verificar se esta na caixa de entrada
@@ -93,8 +89,7 @@ public class ExemploTest extends TestCase {
 
 		
 		
-		//boolean achouCatolica = driver.getPageSource().contains("https://mail.google.com/mail/#inbox");
-		//assertTrue(achouCatolica);
+		
 		
 		
 		// Clica em compose = criar nova mensagem
@@ -104,6 +99,7 @@ public class ExemploTest extends TestCase {
 
 		Thread.sleep(2000);
 		
+		
 		// font: https://stackoverflow.com/questions/26390634/clicking-compose-button-in-gmail-using-selenium-webdriver
 		//driver.findElement(By.xpath("//div[contains(text(),'COMPOSE')]")).click();
 		
@@ -112,11 +108,7 @@ public class ExemploTest extends TestCase {
 		
 		// preenche os campos destinatario, assunto e conteúdo respectivamente;
 		driver.findElement(By.xpath("//textarea[@class='vO']")).sendKeys("seleniumteste7@gmail.com");
-		driver.findElement(By.xpath("//input[@class='aoT']")).sendKeys("Teste de Sistema");
-		
-		//driver.findElement(By.xpath("//div[@class='Ar Au'"));
-		
-		
+		driver.findElement(By.xpath("//input[@class='aoT']")).sendKeys("Teste de Sistema");	
 		
 		
 		
@@ -132,59 +124,38 @@ public class ExemploTest extends TestCase {
 		System.out.println("3. Novo e-mail enviado");
 		
 		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		// access sent messages;
+		driver.findElement(By.xpath("//a[@title='Sent']")).click();
+		
+		/*
+		 * Codigo validação caixa de enviados
+		 * 
+		 */
+		
+		
+		//driver.findElement(By.xpath("//a[@title='Inbox']")).click();
+		
 		/*
 		 * 
-		 *  Codigo validação
+		 *  Codigo validação se esta na caixa de entrada
 		 */
 		
 		//System.out.println("\t3. Presente na caixa de enviados e recebidos");
 
 		
 		
-
-		//			FIXEEEEEEEEEEEEEEEEEEEEEEEEEEED
-		// access sent messages;
-		driver.findElement(By.xpath("//a[@title='Sent']")).click();
+		/*		POSSIVELMETE UTIL PARA FAZER AS VALIDAÇÕES
 		
-		
-		
-		
-		/* VERIFICANDO SE ESTÁ NOS ENVIADOS ------- !
-		
-		
-		
-		
-		
-		
-		//font: http://shilpamynampati.blogspot.com/2013/02/composing-email-using-selenium-webdriver.html
-		
-//		driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div")).click();
-//		driver.findElement(By.xpath("//iframe[@class= 'Am Al editable']")).click();
-//	    driver.findElement(By.xpath("//iframe[@class= 'Am Al editable']")).sendKeys("Selenium webdrive é legal!");
-//		
-//	    
-//		
-//		driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\":ay\"]")));
-//		WebElement printbody = driver.switchTo().activeElement();
-//		printbody.sendKeys("Selenium webdrive é legal! ");
-		
-
-		
-		Thread.sleep(2000);
-				
-
-		// Não retornando erro
-		//driver.findElement(By.xpath("//div[@class='TO nZ aiq']/div/div[@class='aio UKr6le']/span/a")).click();		
-		
-		// acessa pasta mensagens enviadas
-		driver.findElement(By.xpath("//a[@title='Sent']")).click();
-		
-		System.out.println("4. Acesso a pasta de e-mails enviados");
-		
-		
-		
-		
-		// Lendo e-mail enviado a mim mesmo
+		// Lendo e-mails enviado a mim mesmo
 
 		// now talking un-read email form inbox into a list
 		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zA zE']"));		
@@ -208,38 +179,9 @@ public class ExemploTest extends TestCase {
 		    }
 		}
 		
-		
-		
-		
-		
-//		for(int i=0; i < unreadmail.size(); i++){
-//
-//			if( unreadmail.get(i).isDisplayed() == true ){
-//				// now verify if you have got mail form a specific mailer (Note Un-read mails)
-//				// for read mails xpath loactor will change but logic will remain same
-//				if( unreadmail.get(i).getText().equals("me") ){
-//					System.out.println("Yes we have got mail form " + "me");
-//					
-//					//unreadmail.get(0).click();
-//					
-//					// also you can perform more actions here 
-//					// like if you want to open email form the mailer
-//
-//				} else {
-//					System.out.println("No mail form " + "me");
-//					break;
-//				}
-//			}
-//		}
-		
-		
-		
-		// TENTANDO VALIDAR E-MAILS
 
 		Thread.sleep(20000);
-		
-		
-		
+			
 		
 		
 		-------------------- !
@@ -248,6 +190,7 @@ public class ExemploTest extends TestCase {
 		
 		
 		
+		// @GET all emails
 		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zF']"));
 		
 		for(WebElement mail : unreadmail) {
@@ -276,21 +219,9 @@ public class ExemploTest extends TestCase {
 		
 		System.out.println("6. E-mail foi respondido");
 
-		
-		/*
-		 * 
-		 *  5. Abrir o e-mail que voce enviou para você mesmo;
-		 *  6. Responder o mesmo e-mail com a mensagem:
-		 * 		"Ok, email lido. Obrigado.";
-		 * 		Validar este email na caixa de entrada e enviados;
-		 * 
-		 *  7. Deletar este e-mail;
-		 *  8. Validar o e-mail na Caixa de itens excluídos;
-		 */
-		
-		
-		
-		
+
+
+				
 		
 
 		// clica no ícone da lixeira
@@ -304,17 +235,17 @@ public class ExemploTest extends TestCase {
 		
 		
 		
-	
+		
+		//TODO: Acessar via elementos visiveis, não por URL;
 		// acessa lixeira
 		driver.get("https://mail.google.com/mail/#trash/");
 		
 		// wait 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='aeF']")));
 		
-
-		Thread.sleep(4000);
 		
-
+		
+		Thread.sleep(4000);
 		
 		
 		
