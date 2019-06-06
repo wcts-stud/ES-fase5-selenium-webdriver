@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -57,8 +56,13 @@ public class ExemploTest extends TestCase {
 		 */
 
 		// aguarda 1s para @GET pagina insercao senha
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		
+		
+		// wait field password
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//input")));
+
 		
 		// insere a senha e próxima página
 		WebElement campoDeSenha = driver.findElement(By.xpath("//input[@class='whsOnd zHQkBf']"));
@@ -113,8 +117,7 @@ public class ExemploTest extends TestCase {
 		//driver.findElement(By.xpath("//div[@class='Ar Au'"));
 		
 		
-		// TODO: falhando ao inserir conteudo do email
-		//driver.findElement(By.xpath("//*[@id=\":w1\"]")).sendKeys("Selenium webdrive é legal!");
+		
 		
 		
 		//Thread.sleep(2000);
@@ -128,18 +131,43 @@ public class ExemploTest extends TestCase {
 
 		System.out.println("3. Novo e-mail enviado");
 		
+		
 		/*
-		 * //font: http://shilpamynampati.blogspot.com/2013/02/composing-email-using-selenium-webdriver.html
-		driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div")).click();
-		driver.findElement(By.xpath("//iframe[@class= 'Am Al editable']")).click();
-	    driver.findElement(By.xpath("//iframe[@class= 'Am Al editable']")).sendKeys("Selenium webdrive é legal!");
-		*/
-	    
-		/*
-		driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\":ay\"]")));
-		WebElement printbody = driver.switchTo().activeElement();
-		printbody.sendKeys("Selenium webdrive é legal! ");
-		*/
+		 * 
+		 *  Codigo validação
+		 */
+		
+		//System.out.println("\t3. Presente na caixa de enviados e recebidos");
+
+		
+		
+
+		//			FIXEEEEEEEEEEEEEEEEEEEEEEEEEEED
+		// access sent messages;
+		driver.findElement(By.xpath("//a[@title='Sent']")).click();
+		
+		
+		
+		
+		/* VERIFICANDO SE ESTÁ NOS ENVIADOS ------- !
+		
+		
+		
+		
+		
+		
+		//font: http://shilpamynampati.blogspot.com/2013/02/composing-email-using-selenium-webdriver.html
+		
+//		driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div")).click();
+//		driver.findElement(By.xpath("//iframe[@class= 'Am Al editable']")).click();
+//	    driver.findElement(By.xpath("//iframe[@class= 'Am Al editable']")).sendKeys("Selenium webdrive é legal!");
+//		
+//	    
+//		
+//		driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\":ay\"]")));
+//		WebElement printbody = driver.switchTo().activeElement();
+//		printbody.sendKeys("Selenium webdrive é legal! ");
+		
 
 		
 		Thread.sleep(2000);
@@ -156,12 +184,12 @@ public class ExemploTest extends TestCase {
 		
 		
 		
-		// Lendo e-mail enviado a mim mesmo		
+		// Lendo e-mail enviado a mim mesmo
 
 		// now talking un-read email form inbox into a list
-		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zF']"));
+		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zA zE']"));		
 		
-		/*
+		
 		// real logic starts here
 		for(int i=0; i < unreadmail.size(); i++){
 					
@@ -179,7 +207,48 @@ public class ExemploTest extends TestCase {
 		        }
 		    }
 		}
+		
+		
+		
+		
+		
+//		for(int i=0; i < unreadmail.size(); i++){
+//
+//			if( unreadmail.get(i).isDisplayed() == true ){
+//				// now verify if you have got mail form a specific mailer (Note Un-read mails)
+//				// for read mails xpath loactor will change but logic will remain same
+//				if( unreadmail.get(i).getText().equals("me") ){
+//					System.out.println("Yes we have got mail form " + "me");
+//					
+//					//unreadmail.get(0).click();
+//					
+//					// also you can perform more actions here 
+//					// like if you want to open email form the mailer
+//
+//				} else {
+//					System.out.println("No mail form " + "me");
+//					break;
+//				}
+//			}
+//		}
+		
+		
+		
+		// TENTANDO VALIDAR E-MAILS
+
+		Thread.sleep(20000);
+		
+		
+		
+		
+		
+		-------------------- !
+		
 		*/
+		
+		
+		
+		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zF']"));
 		
 		for(WebElement mail : unreadmail) {
 			if( mail.isDisplayed() == true ){
@@ -200,10 +269,12 @@ public class ExemploTest extends TestCase {
 		
 		// clica para enviar o e-mail
 		driver.findElement(By.xpath("//div[text()='Send']")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Message sent.')]")));
-		Thread.sleep(2000);
 		
-		System.out.println("6. E-mail recebido foi respondido");
+		// wait notification "message sent." 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Message sent.')]")));
+		//Thread.sleep(2000);
+		
+		System.out.println("6. E-mail foi respondido");
 
 		
 		/*
@@ -218,18 +289,36 @@ public class ExemploTest extends TestCase {
 		 */
 		
 		
+		
+		
+		
+
+		// clica no ícone da lixeira
+		driver.findElement(By.cssSelector(".iH > div:nth-child(1) > div:nth-child(2) > div:nth-child(3)")).click();		
+		
+		// wait message "Conversation moved to Trash."
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Conversation moved to Trash.')]")));
+		
+		System.out.println("7. E-mail enviado para lixeira");
+		
+		
+		
+		
 	
 		// acessa lixeira
 		driver.get("https://mail.google.com/mail/#trash/");
-
+		
+		// wait 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='aeF']")));
 		
 
-		Thread.sleep(4000);	
+		Thread.sleep(4000);
+		
+
 		
 		
 		
-		// TODO: deletando e-mail - FALHANDO 
-		
+		// @GET in list mails 
 		List<WebElement> deleted = driver.findElements(By.xpath("//*[@class='zA zE']"));
 		
 		for(WebElement mail : deleted) {
@@ -237,15 +326,25 @@ public class ExemploTest extends TestCase {
 				mail.click();
 			}
 		}
+		
+		// wait body full mail 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nH if']")));
+		
 		
 		// clica no botão "delete forever"		driver.findElement(By.xpath("/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[1]/div[3]/div[1]/div/div[2]/div")).click();
 
-		System.out.println("7. E-mail respondido deletado");
+		// TODO: Nao esta aguardando ser deletado e ja passa pra etapa de fazer logoff e quebra o teste
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Conversation deleted forever')]")));		
+		
+		System.out.println("\t7.1- E-mail deletado da lixeira");
 		
 
+		Thread.sleep(10000);	
 
 		
+		
+
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nH if']")));
 		
 
 
@@ -259,7 +358,7 @@ public class ExemploTest extends TestCase {
 		driver.findElement(By.xpath("//a[@class='gb_x gb_Ea gb_f']")).click();
 		driver.findElement(By.xpath("//div[@class='gb_Ef gb_jb']//a[@class='gb_0 gb_Jf gb_Qf gb_qe gb_kb']")).click();
 
-		System.out.println("9. Logout da conta Google concluído");
+		System.out.println("8. Logout da conta Google concluído");
 		
 
 		Thread.sleep(3000);
