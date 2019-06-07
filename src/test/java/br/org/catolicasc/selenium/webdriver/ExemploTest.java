@@ -1,4 +1,3 @@
-
 package br.org.catolicasc.selenium.webdriver;
 
 
@@ -119,6 +118,8 @@ public class ExemploTest extends TestCase {
 	
 		// clica para enviar o e-mail
 		driver.findElement(By.xpath("//div[text()='Send']")).click();
+		
+		// aguarda mensagem "Message sent" aparecer para continuar
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Message sent')]")));
 
 		System.out.println("3. Novo e-mail enviado");
@@ -126,7 +127,33 @@ public class ExemploTest extends TestCase {
 		
 		
 		
-	
+		
+		
+		/*
+		//Verifica se está na caixa de entrada 
+		driver.findElement(By.xpath("//a[@title='Inbox']")).isDisplayed();
+		assertTrue(emInbox);
+		*/
+		
+		
+		WebElement unreadmailvalid = driver.findElement(By.xpath("//*[@class='zA zE']"));		
+		
+		
+		//Se está na caixa de entrada então verifica se tem email 			
+		    if( unreadmailvalid.isDisplayed() == true ){		    	
+		    	//Verifica se o email contem o titulo Teste de Sistema
+		        if( unreadmailvalid.getText().contains("Teste de Sistema")){
+		        	//Verifica se o email contem o conteudo Selenium webdrive é legal!
+		        	if( unreadmailvalid.getText().contains("Selenium webdrive é legal!")){
+		        		assertTrue(true); 
+		        		System.out.println("\t E-mail está na caixa de entrada");
+		        	} else {
+		        		System.out.println("\t E-mail não está na caixa de entrada");
+		        	}
+		        }
+		  }
+		    
+
 		
 		
 		
@@ -136,97 +163,53 @@ public class ExemploTest extends TestCase {
 		// access sent messages;
 		driver.findElement(By.xpath("//a[@title='Sent']")).click();
 
-		
-		
-		/*
-		 * Codigo validação caixa de enviados
-		 * 
-		 */
-		
-		
-		//driver.findElement(By.xpath("//a[@title='Inbox']")).click();
-		
-		/*
-		 * 
-		 *  Codigo validação se esta na caixa de entrada
-		 */
-		
-		//System.out.println("\t3. Presente na caixa de enviados e recebidos");
 
+		WebElement sentmailvalid = driver.findElement(By.xpath("//*[@class='zA zE']"));		
 		
 		
-		/*		POSSIVELMETE UTIL PARA FAZER AS VALIDAÇÕES
-		
-		// Lendo e-mails enviado a mim mesmo
-
-		// now talking un-read email form inbox into a list
-		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zA zE']"));		
-		
-		
-		// real logic starts here
-		for(int i=0; i < unreadmail.size(); i++){
-					
-		    if( unreadmail.get(i).isDisplayed() == true ){		    	
-		        // now verify if you have got mail form a specific mailer (Note Un-read mails)
-		        // for read mails xpath loactor will change but logic will remain same
-		        if( unreadmail.get(i).getText().equals("me") ){
-		            System.out.println("Yes we have got mail form " + "me");
-		            // also you can perform more actions here 
-		            // like if you want to open email form the mailer
-		            
-		            break;
-		        } else {
-		            System.out.println("No mail form " + "me");
+		//Se está na caixa de entrada então verifica se tem email 			
+		    if( sentmailvalid.isDisplayed() == true ){		    	
+		    	//Verifica se o email contem o titulo Teste de Sistema
+		        if( sentmailvalid.getText().contains("Teste de Sistema")){
+		        	//Verifica se o email contem o conteudo Selenium webdrive é legal!
+		        	if( sentmailvalid.getText().contains("Selenium webdrive é legal!")){
+		        		assertTrue(true); 
+		        		System.out.println("\t E-mail está na caixa de enviados");
+		        	} else {
+		        		System.out.println("\t E-mail não está na caixa de enviados");
+		        	}
 		        }
-		    }
-		}
+		  }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
-		Thread.sleep(20000);
-			
-		// Criando uma condição:
-		//WebElement composeElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@role='button' and (.)='Compose']")));                            
-
-		-------------------- !
-		
-		*/
-		
-		
-		
-		// @GET all emails
-		List<WebElement> sentmail = driver.findElements(By.xpath("//*[@class='zA zE']"));
-		
-		for(WebElement mail : sentmail) {
-			if( mail.isDisplayed() == true ){
-				//mail.click();
-				System.out.println("\t4.1. E-mail está na caixa de enviados");
-				break;
-			}
-		}
-
-		
-
-		Thread.sleep(4000);
-		
-		
-		// access received messages;
+		// access sent messages;
 		driver.findElement(By.xpath("//a[@title='Inbox']")).click();
 		
-
+				
 		// @GET all emails
-		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zA zE']"));
+		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zF']"));
 		
 		for(WebElement mail : unreadmail) {
 			if( mail.isDisplayed() == true ){
 				mail.click();
 			}
 		}
+
 		System.out.println("5. E-mail recebido foi aberto");
 		
-		
-		
-		// tr[@class='zA zE']: e-mail da caixa de entrada/saída não lido; 
-		// tr[@class='zA yO']: e-mail da caixa de entrada/saída lido;
 		
 		
 		
@@ -275,6 +258,28 @@ public class ExemploTest extends TestCase {
 		
 		
 		
+
+		WebElement mailtrashvalid = driver.findElement(By.xpath("//*[@class='zA zE']"));		
+		
+		
+		//Se está na caixa de entrada então verifica se tem email 			
+		    if( mailtrashvalid.isDisplayed() == true ){		    	
+		    	//Verifica se o email contem o titulo Teste de Sistema
+		        if( mailtrashvalid.getText().contains("Teste de Sistema")){
+		        	//Verifica se o email contem o conteudo Selenium webdrive é legal!
+		        	if( mailtrashvalid.getText().contains("Ok, email lido. Obrigado.")){
+		        		assertTrue(true); 
+		        		System.out.println("\t E-mail na lixeira");
+		        	} else {
+		        		System.out.println("\t E-mail não está na lixeira");
+		        	}
+		        }
+		  }
+		    
+		    
+		/*
+		
+		
 		// @GET in list mails 
 		List<WebElement> deleted = driver.findElements(By.xpath("//*[@class='zA zE']"));
 		
@@ -284,12 +289,17 @@ public class ExemploTest extends TestCase {
 			}
 		}
 		
+		
+		
+		
+		
+		
+		
 		// wait body full mail 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nH if']")));
 		
 		
-		// clica no botão "delete forever"
-		driver.findElement(By.xpath("/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[1]/div[3]/div[1]/div/div[2]/div")).click();
+		// clica no botão "delete forever"		driver.findElement(By.xpath("/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[1]/div[3]/div[1]/div/div[2]/div")).click();
 
 		// TODO: Nao esta aguardando ser deletado e ja passa pra etapa de fazer logoff e quebra o teste
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Conversation deleted forever')]")));		
@@ -301,11 +311,17 @@ public class ExemploTest extends TestCase {
 
 		
 		
+		
+		
+		
+		
+		
+		
 
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nH if']")));
 		
 
-
+		*/
 		
 		
 		
