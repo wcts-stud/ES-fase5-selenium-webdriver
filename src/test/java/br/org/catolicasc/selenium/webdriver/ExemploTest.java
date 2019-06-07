@@ -135,6 +135,8 @@ public class ExemploTest extends TestCase {
 		
 		// access sent messages;
 		driver.findElement(By.xpath("//a[@title='Sent']")).click();
+
+		
 		
 		/*
 		 * Codigo validação caixa de enviados
@@ -182,8 +184,9 @@ public class ExemploTest extends TestCase {
 
 		Thread.sleep(20000);
 			
-		
-		
+		// Criando uma condição:
+		//WebElement composeElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@role='button' and (.)='Compose']")));                            
+
 		-------------------- !
 		
 		*/
@@ -191,16 +194,39 @@ public class ExemploTest extends TestCase {
 		
 		
 		// @GET all emails
-		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zF']"));
+		List<WebElement> sentmail = driver.findElements(By.xpath("//*[@class='zA zE']"));
+		
+		for(WebElement mail : sentmail) {
+			if( mail.isDisplayed() == true ){
+				//mail.click();
+				System.out.println("\t4.1. E-mail está na caixa de enviados");
+				break;
+			}
+		}
+
+		
+
+		Thread.sleep(4000);
+		
+		
+		// access received messages;
+		driver.findElement(By.xpath("//a[@title='Inbox']")).click();
+		
+
+		// @GET all emails
+		List<WebElement> unreadmail = driver.findElements(By.xpath("//*[@class='zA zE']"));
 		
 		for(WebElement mail : unreadmail) {
 			if( mail.isDisplayed() == true ){
 				mail.click();
 			}
 		}
-
 		System.out.println("5. E-mail recebido foi aberto");
 		
+		
+		
+		// tr[@class='zA zE']: e-mail da caixa de entrada/saída não lido; 
+		// tr[@class='zA yO']: e-mail da caixa de entrada/saída lido;
 		
 		
 		
@@ -262,7 +288,8 @@ public class ExemploTest extends TestCase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nH if']")));
 		
 		
-		// clica no botão "delete forever"		driver.findElement(By.xpath("/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[1]/div[3]/div[1]/div/div[2]/div")).click();
+		// clica no botão "delete forever"
+		driver.findElement(By.xpath("/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[1]/div[3]/div[1]/div/div[2]/div")).click();
 
 		// TODO: Nao esta aguardando ser deletado e ja passa pra etapa de fazer logoff e quebra o teste
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Conversation deleted forever')]")));		
