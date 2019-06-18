@@ -98,7 +98,6 @@ public class ExemploTest extends TestCase {
 		Thread.sleep(4000);
 
 
-		//TODO: remover bool do met checkBox
 
 		/*
 		 * Verificar se esta na caixa de entrada
@@ -111,10 +110,10 @@ public class ExemploTest extends TestCase {
 		}
 
 
+		
 		/*
 		 * Criar um email e enviar para a própria conta
 		 */
-
 
 		// Clica em compose = criar nova mensagem
 		driver.findElement(By.xpath("//div[@class='z0']/div")).click();
@@ -298,6 +297,7 @@ public class ExemploTest extends TestCase {
 		/*
 		 * Clica no ícone da lixeira p/ enviar para lixeira
 		 */
+		
 		// clica no ícone da lixeira do e-mail que está aberto
 		driver.findElement(By.cssSelector(".iH > div:nth-child(1) > div:nth-child(2) > div:nth-child(3)")).click();	
 
@@ -338,42 +338,9 @@ public class ExemploTest extends TestCase {
 			
 		} else {
 			assertTrue(false); 
-		}
-		
-
-		
-		/*
-		 * Deleta e-mail da lixeira 
-		 */
-		
-		/*
-		// @GET in list mails 
-		List<WebElement> deleted = driver.findElements(By.xpath("//*[@class='zA yO']"));
-		for(WebElement mail : deleted) {
-			if(mail.isDisplayed()) {
-				mail.click();
-			}
-		}
-
-		// wait body full mail 
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nH if']")));
+		}		
 
 
-		Thread.sleep(4000);
-		
-		// clica no botão "delete forever"
-		driver.findElement(By.xpath("/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div/div[2]/div/div")).click();
-		//driver.findElement(By.cssSelector(".iH > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"));
-		
-		// TODO: Nao esta aguardando ser deletado e ja passa pra etapa de fazer logoff e quebra o teste
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Conversation deleted forever')]")));
-		
-		Thread.sleep(4000);
-
-		System.out.println("\t7.1- E-mail deletado da lixeira");		
-		*/
-
-		
 
 		/*
 		 * Saindo da conta do Google - "signout"
