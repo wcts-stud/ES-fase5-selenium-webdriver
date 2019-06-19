@@ -79,8 +79,8 @@ public class ExemploTest extends TestCase {
 		/*
 		 * Insere e-mail para login
 		 */
-		WebElement campoDeTexto = driver.findElement(By.name("identifier"));
-		campoDeTexto.sendKeys("seleniumteste7@gmail.com");
+		WebElement textField = driver.findElement(By.name("identifier"));
+		textField.sendKeys("seleniumteste7@gmail.com");
 		driver.findElement(By.id("identifierNext")).click();
 
 
@@ -89,8 +89,8 @@ public class ExemploTest extends TestCase {
 
 
 		// Insere a senha e "next"
-		WebElement campoDeSenha = driver.findElement(By.xpath("//input[@class='whsOnd zHQkBf']"));
-		campoDeSenha.sendKeys("Teste12345");
+		WebElement passwordField = driver.findElement(By.xpath("//input[@class='whsOnd zHQkBf']"));
+		passwordField.sendKeys("Teste12345");
 		driver.findElement(By.id("passwordNext")).click();
 
 		System.out.println("1. Login realizado com sucesso");
@@ -120,8 +120,8 @@ public class ExemploTest extends TestCase {
 		Thread.sleep(2000);
 
 
-		boolean achouCompose = driver.getPageSource().contains("New Message");
-		assertTrue(achouCompose);
+		boolean composeFound = driver.getPageSource().contains("New Message");
+		assertTrue(composeFound);
 
 		// Preenche os campos destinatario, assunto e conteúdo respectivamente;
 		driver.findElement(By.xpath("//textarea[@class='vO']")).sendKeys("seleniumteste7@gmail.com");
@@ -144,13 +144,13 @@ public class ExemploTest extends TestCase {
 		 * Valida e-mail da caixa de entrada;
 		 */	
 
-		WebElement unreadmailvalid = driver.findElement(By.xpath("//*[@class='zA zE']"));
+		WebElement unreadMailValid = driver.findElement(By.xpath("//*[@class='zA zE']"));
 
 		if ( checkBox("inbox") ) {
 				//System.out.println("\t Estamos na caixa de entrada.");
 
 				assertTrue(
-						validMail(unreadmailvalid, "Selenium webdrive é legal!", "entrada")
+						validMail(unreadMailValid, "Selenium webdrive é legal!", "entrada")
 						);
 		}else {
 			assertTrue(false); 
@@ -168,13 +168,13 @@ public class ExemploTest extends TestCase {
 		Thread.sleep(5000);
 
 
-		WebElement unreadmailvalidSend = driver.findElement(By.xpath("//*[@id=\":1\"]/div/div[2]"));
+		WebElement unreadMailValidSend = driver.findElement(By.xpath("//*[@id=\":1\"]/div/div[2]"));
 
 		if ( checkBox("sent") ) {
 			//System.out.println("\t Estamos na caixa de saída.");
 
 			assertTrue(
-					validMail(unreadmailvalidSend, "Selenium webdrive é legal!", "saída")
+					validMail(unreadMailValidSend, "Selenium webdrive é legal!", "saída")
 					);
 			
 		} else {
@@ -192,9 +192,9 @@ public class ExemploTest extends TestCase {
 
 
 		// Verifica os email não lidos
-		List<WebElement> unreadEmails = driver.findElements(By.xpath("//*[@class='zF']"));
+		List<WebElement> unreadMails = driver.findElements(By.xpath("//*[@class='zF']"));
 
-		for(WebElement mail : unreadEmails) {
+		for(WebElement mail : unreadMails) {
 			if( mail.isDisplayed() == true ){
 				mail.click();
 			}
@@ -236,13 +236,13 @@ public class ExemploTest extends TestCase {
 		 * Valida se o e-mail respondido está na caixa de entrada;
 		 */	
 
-		WebElement unreadmailvalidRes = driver.findElement(By.xpath("//*[@class='zA zE']"));
+		WebElement unreadMailvalidReply = driver.findElement(By.xpath("//*[@class='zA zE']"));
 
 		if ( checkBox("inbox") ) {
 			System.out.println("6. Validando e-mail respondido");
 
 			assertTrue(
-					validMail(unreadmailvalidRes, "Ok, email lido. Obrigado.", "entrada")
+					validMail(unreadMailvalidReply, "Ok, email lido. Obrigado.", "entrada")
 					);
 			
 		} else {
@@ -261,13 +261,13 @@ public class ExemploTest extends TestCase {
 		Thread.sleep(5000);
 
 
-		WebElement unreadmailvalidSendRep = driver.findElement(By.xpath("//*[@id=\":1\"]/div/div[2]"));
+		WebElement unreadmailvalidSendReply = driver.findElement(By.xpath("//*[@id=\":1\"]/div/div[2]"));
 
 		if ( checkBox("sent") ) {
 			//System.out.println("\t Estamos na caixa de enviados.");		
 
 			assertTrue(
-					validMail(unreadmailvalidSendRep, "Ok, email lido. Obrigado.", "saída")
+					validMail(unreadmailvalidSendReply, "Ok, email lido. Obrigado.", "saída")
 					);
 			
 		} else {
@@ -282,9 +282,9 @@ public class ExemploTest extends TestCase {
 
 		Thread.sleep(5000);
 
-		List<WebElement> unreadEmailsR = driver.findElements(By.xpath("//*[@class='zF']"));
+		List<WebElement> unreadMailsReply = driver.findElements(By.xpath("//*[@class='zF']"));
 
-		for(WebElement mail : unreadEmailsR) {
+		for(WebElement mail : unreadMailsReply) {
 			if( mail.isDisplayed() == true ){
 				mail.click();
 			}
@@ -324,7 +324,7 @@ public class ExemploTest extends TestCase {
 		/*
 		 * Valida se o email está na lixeira 
 		 */
-		WebElement unreadmailvalidTrash = driver.findElement(By.xpath("//*[@class='zA yO']"));
+		WebElement readMailValidTrash = driver.findElement(By.xpath("//*[@class='zA yO']"));
 
 		Thread.sleep(2000);
 		
@@ -333,7 +333,7 @@ public class ExemploTest extends TestCase {
 			//System.out.println("\t Estamos na lixeira.");
 			
 			assertTrue(
-					validMail(unreadmailvalidTrash, "Ok, email lido. Obrigado.", "excluídos")
+					validMail(readMailValidTrash, "Ok, email lido. Obrigado.", "excluídos")
 					);
 			
 		} else {
@@ -363,10 +363,10 @@ public class ExemploTest extends TestCase {
 		 * Valida se está na tela login
 		 */
 
-		boolean telaDeLogin = driver.findElement(By.name("password")).isDisplayed();
-		assertTrue(telaDeLogin);
+		boolean loginScreen = driver.findElement(By.name("password")).isDisplayed();
+		assertTrue(loginScreen);
 
-		System.out.println("Estamos na tela de login.\n\n"
+		System.out.println("9. Estamos na tela de login.\n\n"
 				+ "\t Teste finalizado...");
 
 
